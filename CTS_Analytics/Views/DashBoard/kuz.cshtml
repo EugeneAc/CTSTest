@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.PageName = Resources.ResourceDashboard.PageName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Шахта им. Кузембаева / Kuzembayeva Mine</h2>
+
+<iframe src="http://@Request.Url.Host:3000/dashboard/db/kuz_@Resources.ResourceGeneral.CurrentLang?orgId=1&kiosk&from=1514743200000&to=1546279199999&theme=light" width="100%" onload="resizeIframe(this)" height="1200" frameborder="0" scrolling="no" id="ifrm"></iframe>
+
+<script>
+    
+    function resizeIframe(iframeID) {
+        var iframe = window.parent.document.getElementById('ifrm');
+        var container = document.getElementById('content');
+        iframe.style.height = container.offsetHeight + 'px';
+    } 
+</script>

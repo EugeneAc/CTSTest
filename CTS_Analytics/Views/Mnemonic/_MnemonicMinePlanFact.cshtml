@@ -1,0 +1,36 @@
+﻿@model CTS_Analytics.Models.Mnemonic.MineGeneral
+@{
+    Layout = "~/Views/Mnemonic/_MnemonicMine.cshtml";
+}
+<div class="mine-plan">
+    <div class="plan-fact">
+        @Resources.ResourceMnemonic.PlanFact (@Resources.ResourceMnemonic.Tonns):
+        <div class="input-group-sm">
+            @*<select class="form-control" id="Control">
+                    <option>Месяц</option>
+                    <option>Неделя</option>
+                    <option>Год</option>
+                </select>*@
+        </div>
+        <div class="result"><b class="green">@Model.ProdPlan</b> / <b class="red">@Model.ProdFact</b></div>
+    </div>
+
+    <div class="plan-fact">
+        @Resources.ResourceMnemonic.Productivity
+        <div class="input-group-sm">
+            @*<select class="form-control" id="Control">
+                    <option>Месяц</option>
+                    <option>Неделя</option>
+                    <option>Год</option>
+                </select>*@
+        </div>
+        <div class="result"><b class="green">@Model.Productivity.ToString("F")</b> </div>
+    </div>
+</div>
+
+@RenderBody()
+
+
+
+
+

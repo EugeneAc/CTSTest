@@ -1,0 +1,262 @@
+﻿@model CTS_Analytics.Models.Mnemonic.MnemonicMain
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.PageName = Resources.ResourceGeneral.HeaderMainPageName;
+}
+
+<div class="topmenu">
+    <a id="MapMenuMap" href='@Url.Action("Map", "Mnemonic")'>@Resources.ResourceMnemonic.MapButton</a>
+    <a class="active" id="MapMenuMapGps" href='@Url.Action("MapGps", "Mnemonic")'>@Resources.ResourceMnemonic.MapGpsButton</a>
+
+    <div class="plan-fact">
+        @Resources.ResourceMnemonic.PlanFact (@Resources.ResourceMnemonic.Tonns):
+        <div class="result"><b class="green">@Model.TotalPlan</b> / <b class="red">@Model.TotalFact</b></div>
+    </div>
+</div>
+
+<div class="main">
+    <div id="map_scheme">
+        <a href="#" data-tooltip-content="#mine1" class="map-mine tooltip-block" class="map-mine" id="map-mine1"></a>
+        <a href="#" data-tooltip-content="#mine2" class="map-mine tooltip-block" id="map-mine2"></a>
+        <a href="#" data-tooltip-content="#mine3" class="map-mine tooltip-block" id="map-mine3"></a>
+        <a href="#" data-tooltip-content="#mine4" class="map-mine tooltip-block" id="map-mine4"></a>
+        <a href="#" data-tooltip-content="#mine5" class="map-mine tooltip-block" id="map-mine5"></a>
+        <a href="#" data-tooltip-content="#mine6" class="map-mine tooltip-block" id="map-mine6"></a>
+        <a href="#" data-tooltip-content="#mine7" class="map-mine tooltip-block" id="map-mine7"></a>
+        <a href="#" data-tooltip-content="#mine8" class="map-mine tooltip-block" id="map-mine8"></a>
+        <a href="#" data-tooltip-content="#mine9" class="map-mine tooltip-block" id="map-mine9"></a>
+
+        <a href="#" data-tooltip-content="@Model.WeightDetails[0].TooltipContent" class="info-block tooltip-block green" id="info-block1"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[1].TooltipContent" class="info-block tooltip-block green" id="info-block2"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[2].TooltipContent" class="info-block tooltip-block green" id="info-block3"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[3].TooltipContent" class="info-block tooltip-block green" id="info-block4"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[4].TooltipContent" class="info-block tooltip-block green" id="info-block5"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[5].TooltipContent" class="info-block tooltip-block red" id="info-block6"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[6].TooltipContent" class="info-block tooltip-block green" id="info-block7"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[7].TooltipContent" class="info-block tooltip-block green" id="info-block8"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[8].TooltipContent" class="info-block tooltip-block green" id="info-block9"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[9].TooltipContent" class="info-block tooltip-block green" id="info-block10"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[10].TooltipContent" class="info-block tooltip-block green" id="info-block11"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[11].TooltipContent" class="info-block tooltip-block red" id="info-block12"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[12].TooltipContent" class="info-block tooltip-block green" id="info-block13"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[13].TooltipContent" class="info-block tooltip-block green" id="info-block14"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[14].TooltipContent" class="info-block tooltip-block green" id="info-block15"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[15].TooltipContent" class="info-block tooltip-block green" id="info-block16"></a>
+        <a href="#" data-tooltip-content="@Model.WeightDetails[16].TooltipContent" class="info-block tooltip-block green" id="info-block17"></a>
+
+        <a href="#" data-tooltip-content="#st4" class="map-st tooltip-block" id="map-st1"></a>
+        <a href="#" data-tooltip-content="#st1" class="map-st tooltip-block" id="map-st2"></a>
+        <a href="#" data-tooltip-content="#st2" class="map-st tooltip-block" id="map-st3"></a>
+
+        <a href="#" data-tooltip-content="#tsov" class="map-tsov tooltip-block" id="map-tsov1"></a>
+
+
+        <a href="#" data-tooltip-content="#train1" style="left:820px; top:160px;" class="map-train tooltip-block" id="map-train1"></a>
+
+
+
+        <div class="legend">
+            <div class="title">@Resources.ResourceMnemonic.Legend</div>
+            <div class="left-leg">
+                <div class="legend-line">
+                    <i class="icon icon_mine"></i> — @Resources.ResourceMnemonic.Mine
+                </div>
+
+
+                <div class="legend-line">
+                    <i class="icon icon_st"></i> — @Resources.ResourceMnemonic.RailRoadStaion
+                </div>
+
+                <div class="legend-line">
+                    <i class="icon icon_tsov"></i> — @Resources.ResourceMnemonic.COF
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="right-leg">
+                <div class="legend-line">
+                    <i class="info-block green"></i> — @Resources.ResourceMnemonic.CoalNormal
+
+                </div>
+
+
+                <div class="legend-line">
+                    <i class="info-block red"></i> — @Resources.ResourceMnemonic.CoalWarning
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="tooltip_templates">
+
+
+            @{
+                Model.Shah.DivId = "mine1";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Shah)
+
+
+            @{
+                Model.Tent.DivId = "mine2";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Tent)
+
+            @{
+                Model.Len.DivId = "mine3";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Len)
+
+            @{
+                Model.Kaz.DivId = "mine4";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Kaz)
+
+            @{
+                Model.Abay.DivId = "mine5";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Abay)
+
+            @{
+                Model.COF.DivId = "tsov";
+            }
+            @Html.Partial("Partials/_CofIcon4Map", Model.COF)
+
+            @{
+                Model.StDubov.DivId = "st1";
+            }
+            @Html.Partial("Partials/_StationIcon4Map", Model.StDubov)
+
+            @{
+                Model.StAbay.DivId = "st2";
+            }
+            @Html.Partial("Partials/_StationIcon4Map", Model.StAbay)
+
+            @{
+                Model.StUgler.DivId = "st3";
+            }
+            @Html.Partial("Partials/_StationIcon4Map", Model.StUgler)
+
+            @{
+                Model.StRaspor.DivId = "st4";
+            }
+            @Html.Partial("Partials/_StationIcon4Map", Model.StRaspor)
+
+
+            @{
+                Model.Kost.DivId = "mine6";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Kost)
+
+            @{
+                Model.Kuz.DivId = "mine7";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Kuz)
+
+            @{
+                Model.Sar3.DivId = "mine8";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Sar3)
+
+            @{
+                Model.Sar1.DivId = "mine9";
+            }
+            @Html.Partial("Partials/_MineIcon4Map", Model.Sar1)
+
+
+            <div class="block-info green" id="bi1">
+                <div class="title">
+                    @Resources.ResourceMnemonic.WeightConclusionGood
+                </div>
+
+                <div class="line">
+                    <span class="name">@Resources.ResourceMnemonic.WeightConclusionIn1Train</span>
+                    <div class="count">3</div>
+                    <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="line">
+                    <span class="name">@Resources.ResourceMnemonic.WeightConclusionWeightPerPeriod</span>
+                    <div class="count">40</div>
+                    <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+
+            <div class="block-info red" id="bi2">
+                <div class="title">
+                    @Resources.ResourceMnemonic.WeithConclustionBad
+                </div>
+
+                <div class="line">
+                    <span class="name">@Resources.ResourceMnemonic.WeightConclusionIn1Train</span>
+                    <div class="count">3</div>
+                    <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="line">
+                    <span class="name">@Resources.ResourceMnemonic.WeightConclusionWeightPerPeriod</span>
+                    <div class="count">40</div>
+                    <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+                    <div class="clearfix"></div>
+                </div>
+
+                <a href="#" class="more"><i></i>@Resources.ResourceMnemonic.MoreInfo</a>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Content/Mnemo/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+<script>
+    jQuery(function () {
+        jQuery('.tooltip-block').tooltipster({
+            animation: 'fade',
+            contentCloning: true,
+            contentAsHTML: true,
+            arrow: false,
+            interactive: true,
+            trigger: 'click',
+
+        }).click(function () {
+            return false;
+        });
+
+
+
+
+
+        jQuery('[title]').tooltipster({
+
+            side: ["right", "top"],
+
+
+        });
+
+
+
+    });
+</script>

@@ -1,0 +1,82 @@
+@model CTS_Analytics.Models.Mnemonic.Mine_konv
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Mnemonic/_MnemonicMine.cshtml";
+    ViewBag.PageName = Resources.ResourceGeneral.HeaderMainPageName;
+    ViewBag.PageSubName = Model.MineName;
+    ViewBag.MinePng = "mine0.png";
+}
+
+<div class="main">
+    <div class="page">
+        <div class="page-head">
+            <h2><i class="konv"></i>@Model.KonvName</h2>
+            <div class="result">
+                <div class="res"><span>@Resources.ResourceMnemonic.CoalWarning</span> <i class="red"></i></div>
+                <div class="clearfix"></div>
+                <div class="res"><span>@Resources.ResourceMnemonic.HSEWarning</span><i class="green"></i></div>
+            </div>
+
+            <div class="close-button">
+                <a href='@Url.Action(Model.ReturnID, "Mnemonic")'>@Resources.ResourceMnemonic.Close  <i></i></a>
+            </div>
+        </div>
+
+        <div class="side w385">
+            <div class="line">
+                <span class="name">@Resources.ResourceMnemonic.ProductionPerShift</span>
+                <div class="count">@Model.ProductionPerShift</div>
+                <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="line">
+                <span class="name">@Resources.ResourceMnemonic.ProdFact</span>
+                <div class="count">@Model.ProductionPerTimeInterval</div>
+                <span class="caption">@Resources.ResourceMnemonic.Tonns</span>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div id="text">
+            <h3>@Resources.ResourceMnemonic.BeltScaleJournal</h3>
+            <div class="scrollbar-outer">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Resources.ResourceMnemonic.Date</th>
+                            <th>@Resources.ResourceMnemonic.Time</th>
+                            <th>@Resources.ResourceMnemonic.LotQuantity, @Resources.ResourceMnemonic.Tonns</th>
+                            <th>@Resources.ResourceMnemonic.TotalQuantity, @Resources.ResourceMnemonic.Tonns</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var transfer in Model.PagedBeltTransfers)
+                        {
+                            <tr>
+                                <td>@transfer.TransferTimeStamp.ToString("dd.MM.yyyy")</td>
+                                <td>@transfer.TransferTimeStamp.ToString("HH:mm")</td>
+                                <td>@transfer.LotQuantity</td>
+                                <td>@transfer.TotalQuantity</td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
+            @Html.PagedListPager(Model.PagedBeltTransfers, page => Url.Action("Mine_konv", new {ID = Model.ReturnID, beltScaleID = Model.BeltID, page = page }))
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/Mnemo/js/jquery.knob.min.js"></script>
+<link href="~/Content/Mnemo/style/jquery.scrollbar.css" rel="stylesheet">
+<script src="~/Content/Mnemo/js/jquery.scrollbar.min.js"></script>
+<script>
+    $(function ($) {
+        jQuery('.scrollbar-outer').scrollbar();
+        $(".knob").knob();
+
+    });
+</script>

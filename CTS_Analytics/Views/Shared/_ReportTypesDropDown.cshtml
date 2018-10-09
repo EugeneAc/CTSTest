@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SelectListItem>
+
+<div class="form-group">
+	<label class="control-label col-md-2" for="types">@Resources.ResourceFilters.Type</label>
+	<select class="multiselect" id="types" name="reportTypesInForm" >
+		@if (Model != null)
+		{
+			foreach (var item in Model)
+			{
+				if (item.Text != null)
+				{
+					<option value="@item.Value">
+						@item.Text
+					</option>
+				}
+			}
+		}
+	</select>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#types').multiselect({
+            includeSelectAllOption: true,
+                selectAllText: '@Resources.ResourceFilters.allSelected',
+                nonSelectedText: '@Resources.ResourceFilters.NonSelected',
+                allSelectedText: '@Resources.ResourceFilters.allSelected',
+                nSelectedText: '@Resources.ResourceFilters.Selected'
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#types').change(function () {
+            $('#BeltScalesContainer').html("");
+            $('#SkipContainer').html("");
+
+            if ($("#types").val() == "@Resources.ResourceFilters.ReportBelt")
+            {
+                $('#BeltScalesContainer').load
+                    ('@Url.Action("GetBeltScales", "Filter",null)?Locations=abay,cofv,kaz,kost,kuz,len,sabay,sar,sar1,sdub,shah,srasp,tent,test');
+            }
+            else if ($("#types").val() == '@Resources.ResourceFilters.ReportSkip')
+            {
+                $('#SkipContainer').load
+                    ('@Url.Action("GetSkips", "Filter",null)?Locations=abay,cofv,kaz,kost,kuz,len,sabay,sar,sar1,sdub,shah,srasp,tent,test');
+            }
+    });
+	});
+
+	$(document).ready(function () {
+        if ($("#types").val() == "@Resources.ResourceFilters.ReportBelt")
+            {
+                $('#BeltScalesContainer').load
+                    ('@Url.Action("GetBeltScales", "Filter",null)?Locations=abay,cofv,kaz,kost,kuz,len,sabay,sar,sar1,sdub,shah,srasp,tent,test');
+            }
+            else if ($("#types").val() == '@Resources.ResourceFilters.ReportSkip')
+            {
+                $('#SkipContainer').load
+                    ('@Url.Action("GetSkips", "Filter",null)?Locations=abay,cofv,kaz,kost,kuz,len,sabay,sar,sar1,sdub,shah,srasp,tent,test');
+            }
+    });
+</script>
+
+

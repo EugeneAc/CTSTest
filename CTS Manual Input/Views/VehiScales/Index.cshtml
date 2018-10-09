@@ -1,0 +1,87 @@
+﻿@model  CTS_Manual_Input.Models.VehiModels.VehiScales_Transfers
+@using PagedList.Mvc;
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Данные о партиях @ViewBag.LocationName</h1>
+@if ((Model.Transfers.Count > 0) && (Model != null))
+{
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>Номер авто</th>
+            <th>Груз</th>
+            <th>Отправитель</th>
+            <th>Получатель</th>
+            <th>Весы</th>
+            <th>Дата отгрузки</th>
+            <th>Комментарий</th>
+            <th>Оператор</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Transfers.Count; i++)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].LotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].Item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].FromDest.LocationName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => Model.Transfers[i].ToDest.LocationName)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].VehiScale.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].TransferTimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Transfers[i].OperatorName)
+            </td>
+            <td>
+                <input type="button" name="EditButton" class="btn btn-content btn-xs" value="Изменить" onclick="location.href='@Url.Action("Edit", "WagonScales", new {Id = Model.Transfers[i].ID })'" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+Страница @(Model.Transfers.PageCount < Model.Transfers.PageNumber ? 0 : Model.Transfers.PageNumber) из @Model.Transfers.PageCount
+
+@Html.PagedListPager(Model.Transfers, page => Url.Action("Index", new { page }))
+
+
+@if ((Model.VehiScales.Count > 0) && (Model != null))
+
+{
+<h2>Добавить новые данные</h2>
+    foreach (var sc in Model.VehiScales)
+    {
+    <h3>Позиция @sc.Name</h3>
+        <div>
+            <input type="button" name="AddButton" class="btn btn-primary" value="Добавить новые данные об отгрузке" onclick="location.href='@Url.Action("Add", "VehiScales", new { ID = sc.ID })'" />
+        </div>
+    }
+}
+
+
+<script type="text/javascript">
+$(function(){
+    $("#Location").on("change", function() {
+        var id = $("#Location").val();
+        window.location.href = @Url.Action("Index","VehiScales", new { Id = 1 });
+    });
+});
+
+</script>
